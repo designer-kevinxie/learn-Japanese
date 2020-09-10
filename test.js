@@ -44,12 +44,18 @@ for (var i = 0 ; i<control.length;i++){
 
 	if((i+1) % 3 == 1){
 		control[i].parentNode.parentNode.parentNode.classList.add("card_01");
+		control[i].children[0].setAttribute("src","images/play-01.svg");
+		control[i].children[1].setAttribute("src","images/pause-01.svg");
 	}
 	else if ((i+1) % 3 == 2) {
 		control[i].parentNode.parentNode.parentNode.classList.add("card_02");
+		control[i].children[0].setAttribute("src","images/play-02.svg");
+		control[i].children[1].setAttribute("src","images/pause-02.svg");
 	}
 	else{
 		control[i].parentNode.parentNode.parentNode.classList.add("card_03");
+		control[i].children[0].setAttribute("src","images/play-03.svg");
+		control[i].children[1].setAttribute("src","images/pause-03.svg");
 
 	}
 
@@ -71,12 +77,10 @@ for (var i = 0 ; i<control.length;i++){
 
 	//seekbar
 	var seekbar = this.nextElementSibling.nextElementSibling.firstElementChild;
-	console.log(seekbar);
 	setInterval(function(){
 		seekbar.value = parseInt((audio.currentTime / audio.duration)*100);//%
-
-		seekbar.style.background = 'linear-gradient(to right, #E49F96 0%, #E49F96 ' + seekbar.value + '%, #fff ' + seekbar.value + '%, white 100%)';
-	},1000);
+		seekbar.style.background = 'linear-gradient(to right, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.12) ' + seekbar.value + '%, #fff ' + seekbar.value + '%, white 100%)';
+	},1000);//every 1 second
 		seekbar.addEventListener("change",function(){
 		console.log('input just changed');
 		audio.currentTime = seekbar.value*(audio.duration / 100 );

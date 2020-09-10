@@ -1,7 +1,13 @@
 @font-face {
   font-family: SoukouMincho;
-  src: url("SoukouMincho.ttf");
+  src: url("fonts/SoukouMincho.ttf");
 }
+
+@font-face {
+  font-family: 方正风雅宋;
+  src: url("fonts/FZFYSJW.ttf");
+}
+
 
 a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote,
 body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em,
@@ -26,7 +32,7 @@ body{
 html {
   margin: 0;
   padding: 0;
-  font-family: SoukouMincho;
+  font-family: SoukouMincho,方正风雅宋;
   font-size: 10px;
 }
 
@@ -68,7 +74,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: fixed;
+  position: absolute;
   top: 2.6rem;
   right: 1.6rem;
   z-index: 999;
@@ -78,10 +84,37 @@ nav {
 .hamburger_menu .line {
   width: 100%;
   height: 2px;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
   background: #5E7361;
+
 }
 
-.dropdown_menu {
+.hamburger_menu .line_1{
+  transform: translate(-50%,-50%) translateY(-8px);
+  transition: transform .33s ease-in-out;
+}
+
+.hamburger_menu .line_3{
+  transform: translate(-50%,-50%) translateY(8px);
+  transition: transform .33s ease-in-out;
+}
+
+.click_dropdown_menu .line_1{
+  transform: translate(-50%,-50%) translateY(0) rotate(45deg);
+}
+.click_dropdown_menu .line_2{
+  visibility: hidden;
+}
+
+.click_dropdown_menu .line_3{
+  transform: translate(-50%,-50%) translateY(0) rotate(-45deg);
+}
+
+
+  .dropdown_menu {
   background-color: #FCFAF3;
   width: 100vw;
   height: 100vh;
@@ -90,14 +123,15 @@ nav {
   left: 0;
   display: flex;
   transform: translateX(100vw);
-  opacity: 0;
+  transition: transform .33s ease-in-out;
 }
 
 .click_dropdown_menu .dropdown_menu{
+
   transform: translateX(0);
-  opacity: 1;
   transition: transform .33s ease-in-out;
 }
+
 
 .dropdown_menu_inner {
   margin: auto;
@@ -111,7 +145,6 @@ nav {
 
 .menu {
   margin: auto;
-  margin-top: 50%;
 }
 
 .menu li {}
@@ -186,7 +219,7 @@ nav {
   margin-top: 2rem;
   font-size: 1.4rem;
   line-height: 1.8rem;
-  font-weight: lighter;
+  font-weight: normal;
   /* color: #F5E4D0; */
   font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu;
 }
@@ -196,6 +229,13 @@ nav {
   line-height: 2.4rem;
   /* color: #F5E4D0; */
 }
+
+.icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
 
 .controls {
   display: flex;
@@ -264,7 +304,7 @@ nav {
   height: 1px;
   width: 1px;
   border-radius: 50%;
-  background: #E49F96;
+  background: #FEE2C2;
   /* box-shadow:linear-gradient(to right, #82CFD0 0%, #82CFD0 50%, #fff 50%, #fff 100%); */
   /* width: 1px;
   height: 1px;
@@ -279,7 +319,7 @@ nav {
   background-color:#E49F96;
 }
  .seekbar input[type="range"]::-moz-range-track {
-  background-color: #F5E4D0;
+  background-color: #FEE2C2;
 }
 .seekbar input[type=range]::-moz-range-thumb {
     border: none;
@@ -297,10 +337,14 @@ nav {
 }
 
 .card_01 {
-
   background: #5E7361;
   color: #F5E4D0 !important;
 }
+
+.card_01 input[type='range']::-webkit-slider-thumb{
+  border: 4px solid #F5E4D0;
+}
+
 .card_02 {
   background: #CD8F87;
   color: #FCFAF3 !important;
@@ -313,6 +357,9 @@ nav {
 }
 .card_02 .controls{
   border: 1px solid #FCFAF3;
+}
+.card_02 input[type='range']::-webkit-slider-thumb{
+  border: 4px solid #FCFAF3;
 }
 
 .card_03 {
@@ -327,4 +374,8 @@ nav {
 }
 .card_03 .controls{
   border: 1px solid #5E7361;
+}
+
+.card_03 input[type='range']::-webkit-slider-thumb{
+  border: 4px solid #5E7361;
 }
