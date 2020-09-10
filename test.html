@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#progressBar{width:600px;height:30px;background:#e9e9e9;margin-top:10px;position: relative;}
+			#playProgressBar{position: absolute;top:0;left:0;background:#20bfd8;height:30px;width:0px;}
+			#ptxt{width:100%;height:30px;text-align:center;font-size:16px;line-height: 30px;z-index: 10;position: absolute;}
+		</style>
+	</head>
+	<body>
+
+		<button onclick="play()">播放</button>
+		<button onclick="pause()">暂停</button>
+		<button onclick="next()">下一曲</button>
+		<button onclick="prev()">上一曲</button>
+
+		<div id="progressBar">
+			<div id="ptxt">0%</div>
+			<div id="playProgressBar"></div>
+		</div>
+
+		<audio  id="AudioDom"></audio>
+
+		<script>
+
+			var arrys = ["mp3/1.mp3","mp3/2.mp3"];
+
+
+			//获取Audio对象
+			var AudioDom  =  document.getElementById("AudioDom");
+			//设置播放源
+			var currMp3 = arrys[0];
+			AudioDom.src = arrys[0];
+
+			//监听 Audio 的 timeupdate方法来实时获取播放进度
+			AudioDom.addEventListener("timeupdate",function(){
+
+				//获取当前播放的百分比  当前进度/总进度
+				var percent  = AudioDom.currentTime / AudioDom.duration
+
+				//计算进度条的因子,百分比需要*该因子,最后才能到100%
+				var sp = 600 / 100 ;
+
+				//拼接进度条的width
+				var swidth =  (percent * 100 * sp) + "px";
+				console.log(percent*100,swidth)
+
+				//设置进度条的播放进度
+				document.getElementById("playProgressBar").style.width = swidth;
+
+				//保留2位小数
+				document.getElementById("ptxt").innerText = ((percent*100).toFixed(2))+"%"
+
+			})
+
+
+
+			//上一曲
+			function prev(){
+				var tmpMp3 = "";
+				arrys.forEach(function(item,index){
+					if(item == currMp3){
+						if(index == 0){
+							//说明是第一个
+							tmpMp3 = arrys[arrys.length - 1];
+						}else{
+							//下一个
+							tmpMp3 = arrys[index-1];
+						}
+						console.log(tmpMp3)
+						AudioDom.src = tmpMp3;
+						setTimeout(function(){
+							play()
+							currMp3 = tmpMp3;
+						},500)
+						return ;
+					}
+				})
+			}
+
+			//下一曲
+			function next(){
+				var tmpMp3 = "";
+				arrys.forEach(function(item,index){
+					if(item == currMp3){
+						if((index+1)>arrys.length-1){
+							//说明是最后一个
+							tmpMp3 = arrys[0];
+						}else{
+							//下一个
+							tmpMp3 = arrys[index+1];
+						}
+						console.log(tmpMp3)
+						AudioDom.src = tmpMp3;
+						setTimeout(function(){
+							play()
+							currMp3 = tmpMp3;
+						},500)
+						return ;
+					}
+				})
+			}
+
+			//播放按钮
+			function play(){
+				AudioDom.play();
+			}
+
+
+			//暂停按钮
+			function pause(){
+				AudioDom.pause()
+			}
+			console.dir(AudioDom)
+
+
+
+		</script>
+	</body>
+</html>
