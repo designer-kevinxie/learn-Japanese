@@ -7,7 +7,9 @@
   font-family: 方正风雅宋;
   src: url("fonts/FZFYSJW.ttf");
 }
-
+*{
+  font-family: SoukouMincho,方正风雅宋;
+}
 
 a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote,
 body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em,
@@ -27,6 +29,14 @@ td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
 }
 body{
   background: #fff;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+
+    overflow: hidden;
+    overflow-y: scroll;
+    /* ios */
+    -webkit-overflow-scrolling: touch;
 }
 
 html {
@@ -36,6 +46,10 @@ html {
   font-size: 10px;
 }
 
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
 
 
 header{
@@ -155,6 +169,7 @@ nav {
   color: #5E7361;
   display: inline-block;
   padding: 1.8rem;
+  font-family: SoukouMincho,方正风雅宋;
 }
 
 .about {
