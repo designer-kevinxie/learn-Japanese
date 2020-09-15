@@ -80,9 +80,11 @@ for (var i = 0; i < cards.length; i++) {
 		var thisCard = this.parentNode;
     var cardHeight = window.getComputedStyle(thisCard).getPropertyValue("height");
     var cardParent = thisCard.parentNode;
-    var cardIndex = Array.prototype.indexOf.call(cardParent.children, thisCard);
+    var nextSibling = thisCard.nextElementSibling;
+    var nextSiblingIndex = Array.prototype.indexOf.call(cardParent.children, nextSibling);
+
 		//test
-    console.log(cardIndex);
+
     console.log(cardHeight);
     console.log("clicked");
 		// toggle css class
@@ -94,38 +96,55 @@ for (var i = 0; i < cards.length; i++) {
 			//set to (0,0) top
       window.scrollTo({top:0,behavior: "smooth"});
 
-			// not last element
-      if (cardIndex != (i - 1)) {
-        thisCard.nextElementSibling.style.top = cardHeight;
-				thisCard.nextElementSibling.style.boxShadow = "none";
-				thisCard.nextElementSibling.style.transition = "top .4s ease-in-out";
-				// not last second element
-				if(cardIndex != (i - 2)){
-					thisCard.nextElementSibling.nextElementSibling.style.top = cardHeight;
-					thisCard.nextElementSibling.nextElementSibling.style.marginTop = "200px";
-					thisCard.nextElementSibling.nextElementSibling.style.transition = "top .5s ease-in-out,margin-top .5s ease-in-out";
-				}
-      }
 
-			// else{
-			//
-			// }
+
+
+
+while(nextSibling){
+  nextSibling.style.top = cardHeight;
+  nextSibling.style.boxShadow = "none";
+  nextSibling.style.transition = "top .4s ease-in-out";
+  nextSibling = nextSibling.nextElementSibling;
+};
+
+			// not last element
+      // if (cardIndex != (i - 1)) {
+      //   thisCard.nextElementSibling.style.top = cardHeight;
+			// 	thisCard.nextElementSibling.style.boxShadow = "none";
+			// 	thisCard.nextElementSibling.style.transition = "top .4s ease-in-out";
+			// 	// not last second element
+			// 	if(cardIndex != (i - 2)){
+			// 		thisCard.nextElementSibling.nextElementSibling.style.top = cardHeight;
+			// 		thisCard.nextElementSibling.nextElementSibling.style.marginTop = "200px";
+			// 		thisCard.nextElementSibling.nextElementSibling.style.transition = "top .5s ease-in-out,margin-top .5s ease-in-out";
+			// 	}
+      // }
     }
 
 		// toggle click again
 		else {
 			//sroll back after click again
       window.scrollTo({top:topDistance,behavior: "smooth"});
-      if (cardIndex != (i - 1)) {
-        thisCard.nextElementSibling.style.top = (cardIndex + 1) * 200 + "px";
-				thisCard.nextElementSibling.style.boxShadow = "0px -4px 16px rgba(0, 0, 0, 0.25)";
-				thisCard.nextElementSibling.style.transition = "top .4s ease-in-out";
-				 if(cardIndex != (i - 2)){
-					thisCard.nextElementSibling.nextElementSibling.style.top = (cardIndex + 2) * 200 + "px";
-					thisCard.nextElementSibling.nextElementSibling.style.marginTop = "0";
-					thisCard.nextElementSibling.nextElementSibling.style.transition = "top .5s ease-in-out,margin-top .5s ease-in-out";
-				}
+
+      while(nextSibling){
+        nextSiblingIndex = Array.prototype.indexOf.call(cardParent.children, nextSibling);
+        nextSibling.style.top = (nextSiblingIndex * 200) + "px";
+        nextSibling.style.boxShadow = "0px -4px 16px rgba(0, 0, 0, 0.25)";
+        nextSibling.style.transition = "top .4s ease-in-out";
+        nextSibling = nextSibling.nextElementSibling;
       }
+
+
+      // if (cardIndex != (i - 1)) {
+      //   thisCard.nextElementSibling.style.top = (cardIndex + 1) * 200 + "px";
+			// 	thisCard.nextElementSibling.style.boxShadow = "0px -4px 16px rgba(0, 0, 0, 0.25)";
+			// 	thisCard.nextElementSibling.style.transition = "top .4s ease-in-out";
+			// 	 if(cardIndex != (i - 2)){
+			// 		thisCard.nextElementSibling.nextElementSibling.style.top = (cardIndex + 2) * 200 + "px";
+			// 		thisCard.nextElementSibling.nextElementSibling.style.marginTop = "0";
+			// 		thisCard.nextElementSibling.nextElementSibling.style.transition = "top .5s ease-in-out,margin-top .5s ease-in-out";
+			// 	}
+      // }
 
     }
 
