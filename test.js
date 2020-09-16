@@ -30,21 +30,21 @@ var topDistance = 0;
 
 content.hamburgerMenu.addEventListener("click", function() {
 
-//toggle class
+  //toggle class
   content.header.classList.toggle("click_dropdown_menu");
 
- // after toggle
+  // after toggle
   if (content.header.classList.contains("click_dropdown_menu")) {
-		// get scroll distance
-		topDistance = window.scrollY;
+    // get scroll distance
+    topDistance = window.scrollY;
     console.log("show");
     console.log(topDistance);
-		// disable body scroll
+    // disable body scroll
     content.body.style.position = 'fixed';
     content.body.style.top = -topDistance + "px";
   }
-// toggle : back
-	else {
+  // toggle : back
+  else {
     console.log("hide");
     content.body.style.position = "";
     content.body.style.top = "";
@@ -72,80 +72,55 @@ window.onscroll = function() {
 var topBefore = 0;
 
 for (var i = 0; i < cards.length; i++) {
-	// set cards position
+  // set cards position
   cards[i].style.top = (i * 200) + "px";
-	//card's header onclick
+  //card's header onclick
   cards[i].firstElementChild.addEventListener("click", function() {
-		// get thiscard and value
-		var thisCard = this.parentNode;
+    // get thiscard and value
+    var thisCard = this.parentNode;
     var cardHeight = window.getComputedStyle(thisCard).getPropertyValue("height");
     var cardParent = thisCard.parentNode;
     var nextSibling = thisCard.nextElementSibling;
     var nextSiblingIndex = Array.prototype.indexOf.call(cardParent.children, nextSibling);
 
-		//test
-
+    //test
     console.log(cardHeight);
     console.log("clicked");
-		// toggle css class
+    // toggle css class
     thisCard.classList.toggle("click_card");
-		// after get class
+    // after get class
     if (thisCard.classList.contains("click_card")) {
-			// get scrollY distance
+      // get scrollY distance
       topDistance = window.scrollY;
-			//set to (0,0) top
-      window.scrollTo({top:0,behavior: "smooth"});
+      //set to (0,0) top
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-
-
-
-
-while(nextSibling){
-  nextSibling.style.top = cardHeight;
-  nextSibling.style.boxShadow = "none";
-  nextSibling.style.transition = "top .4s ease-in-out";
-  nextSibling = nextSibling.nextElementSibling;
-};
-
-			// not last element
-      // if (cardIndex != (i - 1)) {
-      //   thisCard.nextElementSibling.style.top = cardHeight;
-			// 	thisCard.nextElementSibling.style.boxShadow = "none";
-			// 	thisCard.nextElementSibling.style.transition = "top .4s ease-in-out";
-			// 	// not last second element
-			// 	if(cardIndex != (i - 2)){
-			// 		thisCard.nextElementSibling.nextElementSibling.style.top = cardHeight;
-			// 		thisCard.nextElementSibling.nextElementSibling.style.marginTop = "200px";
-			// 		thisCard.nextElementSibling.nextElementSibling.style.transition = "top .5s ease-in-out,margin-top .5s ease-in-out";
-			// 	}
-      // }
+      while (nextSibling) {
+        nextSibling.style.top = cardHeight;
+        nextSibling.style.boxShadow = "none";
+        nextSibling.style.transition = "top .4s ease-in-out";
+        nextSibling = nextSibling.nextElementSibling;
+      };
     }
 
-		// toggle click again
-		else {
-			//sroll back after click again
-      window.scrollTo({top:topDistance,behavior: "smooth"});
-
-      while(nextSibling){
+    // toggle click again
+    else {
+      //sroll back after click again
+      window.scrollTo({
+        top: topDistance,
+        behavior: "smooth"
+      });
+      //all cards back
+      while (nextSibling) {
         nextSiblingIndex = Array.prototype.indexOf.call(cardParent.children, nextSibling);
         nextSibling.style.top = (nextSiblingIndex * 200) + "px";
         nextSibling.style.boxShadow = "0px -4px 16px rgba(0, 0, 0, 0.25)";
         nextSibling.style.transition = "top .4s ease-in-out";
         nextSibling = nextSibling.nextElementSibling;
       }
-
-
-      // if (cardIndex != (i - 1)) {
-      //   thisCard.nextElementSibling.style.top = (cardIndex + 1) * 200 + "px";
-			// 	thisCard.nextElementSibling.style.boxShadow = "0px -4px 16px rgba(0, 0, 0, 0.25)";
-			// 	thisCard.nextElementSibling.style.transition = "top .4s ease-in-out";
-			// 	 if(cardIndex != (i - 2)){
-			// 		thisCard.nextElementSibling.nextElementSibling.style.top = (cardIndex + 2) * 200 + "px";
-			// 		thisCard.nextElementSibling.nextElementSibling.style.marginTop = "0";
-			// 		thisCard.nextElementSibling.nextElementSibling.style.transition = "top .5s ease-in-out,margin-top .5s ease-in-out";
-			// 	}
-      // }
-
     }
 
   }); //click end
@@ -153,9 +128,9 @@ while(nextSibling){
 
 
 
-// audio event
+// audio event --------------------------------------------------------------------
 for (var i = 0; i < control.length; i++) {
-
+  //3 kind color of icon
   if ((i + 1) % 3 == 1) {
     control[i].parentNode.parentNode.parentNode.classList.add("card_01");
     control[i].children[0].setAttribute("src", "images/play-01.svg");
@@ -171,16 +146,14 @@ for (var i = 0; i < control.length; i++) {
 
   }
 
-  // control[i].parentNode.parentNode.parentNode.style.zIndex= i+1+"";
-
-
-  // click event
+  // click event------------------------------------------------------
   control[i].addEventListener("click", function() {
 
     //audio control play pause
     var audio = this.parentNode.previousElementSibling;
-    console.log(audio); //test
     audio.volume = 1;
+    console.log(audio); //test
+    //toogle
     if (audio.paused) {
       audio.play();
       this.classList.remove("paused");
@@ -191,33 +164,37 @@ for (var i = 0; i < control.length; i++) {
 
     //seekbar
     var seekbar = this.nextElementSibling.nextElementSibling.firstElementChild;
+    //every 1 second
     setInterval(function() {
+      //prosess bar
       seekbar.value = parseInt((audio.currentTime / audio.duration) * 100); //%
       seekbar.style.background = 'linear-gradient(to right, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.12) ' + seekbar.value + '%, #fff ' + seekbar.value + '%, white 100%)';
-    }, 1000); //every 1 second
-    seekbar.addEventListener("change", function() {
-      console.log('input just changed');
-      audio.currentTime = seekbar.value * (audio.duration / 100);
-    });
+    }, 1000);
+      //change input value by user
+      seekbar.addEventListener("change", function() {
+        console.log('input just changed');//test
+        audio.currentTime = seekbar.value * (audio.duration / 100);
+      });
 
-    //time
+
+//audio time
     var timeTotal = this.nextElementSibling.children[1];
     var timeCurrent = this.nextElementSibling.children[0];
 
     //timeTotal
-    let hour = Math.floor(audio.duration / 3600); //向下取整
-    let left = Math.floor(audio.duration % 3600); //求余
+    let hour = Math.floor(audio.duration / 3600); //Round down 向下取整
+    let left = Math.floor(audio.duration % 3600); //mod 求余
     let minute = Math.floor(left / 60);
     let second = Math.floor(left % 60);
-    (hour < 10) && (hour = "0" + hour);
+    (hour < 10) && (hour = "0" + hour);// ture ->> second
     (minute < 10) && (minute = "0" + minute);
     (second < 10) && (second = "0" + second);
     timeTotal.innerHTML = minute + ":" + second;
 
     //timeCurrent
     audio.addEventListener("timeupdate", function() {
-      let hour = Math.floor(audio.currentTime / 3600); //向下取整
-      let left = Math.floor(audio.currentTime % 3600); //求余
+      let hour = Math.floor(audio.currentTime / 3600);
+      let left = Math.floor(audio.currentTime % 3600);
       let minute = Math.floor(left / 60);
       let second = Math.floor(left % 60);
       (hour < 10) && (hour = "0" + hour);
@@ -232,24 +209,7 @@ for (var i = 0; i < control.length; i++) {
       this.nextElementSibling.children[0].classList.add("paused");
     })
 
-  }); //click event end
+  }); //click event end--------------------------------------------
 
 
-} //1st for loop end
-
-
-// for(i=0;i<audios.length;i++){
-//
-// 	audios[i].addEventListener("loadedmetadata",function(){
-//
-// 		var timeTotal = this.nextElementSibling.children[1].children[1];
-// 		let hour = Math.floor (this.duration / 3600);//向下取整
-// 		let left = Math.floor(this.duration % 3600);//求余
-// 		let minute = Math.floor(left / 60);
-// 		let second = Math.floor(left % 60);
-// 		(hour<10)&&(hour = "0" + hour);
-// 		(minute<10)&&(minute = "0" + minute);
-// 		(second<10)&&(second = "0" + second);
-// 		timeTotal.innerHTML = minute + ":" +second;
-// 	});
-// }
+} //1st for loop end-------------------------------------------------------
