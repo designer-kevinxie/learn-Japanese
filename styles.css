@@ -56,7 +56,7 @@ body::-webkit-scrollbar {
 /*-------------------------------------header , nav,  dropdown--------------------------*/
 
 header {
-  position: relative;
+  /* position: relative; */
   display: flex;
 }
 
@@ -90,7 +90,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: fixed;
+  position: absolute;
   top: 2.6rem;
   right: 1.6rem;
   z-index: 999;
@@ -105,6 +105,7 @@ nav {
   left: 50%;
   transform: translate(-50%, -50%);
   background: #5E7361;
+  z-index: 999;
 }
 
 .hamburger_menu .line_1 {
@@ -436,6 +437,11 @@ nav {
   .click_dropdown_menu .dropdown_menu {
     transform: translateX(0);
     transition: transform .33s ease-in-out;
+
+  }
+
+  .click_dropdown_menu .hamburger_menu{
+    position: fixed;
   }
 
 }
